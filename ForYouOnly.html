@@ -15,7 +15,6 @@
             font-family: sans-serif;
             text-align: center;
             overflow: hidden;
-            /* Critical for Android: prevents the browser from taking over the touch */
             touch-action: none; 
         }
 
@@ -26,16 +25,21 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             max-width: 85%;
             width: 320px;
+            position: relative;
             z-index: 10;
         }
+
+        h1 { color: #d63384; font-size: 1.5rem; }
+        p { color: #555; font-size: 1rem; }
 
         .btn-group {
             margin-top: 25px;
             display: flex;
             justify-content: center;
             gap: 20px;
-            position: relative;
-            height: 60px;
+            /* Changed to relative to give buttons their own space initially */
+            position: relative; 
+            min-height: 50px;
         }
 
         button {
@@ -45,7 +49,7 @@
             border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
-            touch-action: none; /* Prevents scrolling when touching buttons */
+            touch-action: none;
         }
 
         #yesBtn { background-color: #ff4d6d; color: white; }
@@ -53,8 +57,9 @@
         #noBtn {
             background-color: #6c757d;
             color: white;
-            position: absolute;
+            /* Removed absolute from here so it doesn't overlap at start */
             transition: transform 0.1s ease;
+            z-index: 99;
         }
 
         .hidden { display: none; }
@@ -78,7 +83,7 @@
     <div id="container">
         <div id="mainContent">
             <h1>Hey Bestie! ✨</h1>
-            <p>Valentine's Day is for the people who make life better. Thanks for being the best friend ever!</p>
+            <p>Valentine's Day is for the people who make life better. Thanks for being you!</p>
             <h3>Will you be my Valentine?</h3>
             
             <div class="btn-group">
@@ -92,28 +97,29 @@
 
     <script>
         const bestieName = "Dostu";
-        const insideJoke = "Even though you're a headache sometimes! 😂";
         let noScale = 1;
 
         function moveButton(event) {
-            // This is the "magic" line for Android. 
-            // It stops the browser from scrolling or opening menus.
             if (event) event.preventDefault();
-
             const noBtn = document.getElementById('noBtn');
-            const padding = 40; 
             
+            // On first touch, switch to fixed positioning so it can move anywhere
+            if (noBtn.style.position !== 'fixed') {
+                noBtn.style.position = 'fixed';
+            }
+
+            // Shrink logic
             noScale -= 0.15;
             if (noScale < 0.3) noScale = 0.3;
 
-            // Get screen dimensions
-            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+            // Calculate random coordinates
+            // Subtracting 100px to keep it away from extreme edges
+            const maxX = window.innerWidth - 100;
+            const maxY = window.innerHeight - 50;
             
-            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
-            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+            const randomX = Math.floor(Math.random() * maxX) + 20;
+            const randomY = Math.floor(Math.random() * maxY) + 20;
             
-            noBtn.style.position = 'fixed';
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
             noBtn.style.transform = `scale(${noScale})`;
@@ -125,7 +131,6 @@
                 <h1 style="font-size: 3rem;">💖</h1>
                 <p style="font-size: 1.5rem; color: #d63384; font-weight: bold;">Yay! Bestie Valentine's! 🌸</p>
                 <p>Can't wait, ${bestieName}!</p>
-                <p style="font-style: italic; color: #ff4d6d;">${insideJoke}</p>
             `;
             document.getElementById('mainContent').classList.add('hidden');
             thanksMsg.classList.remove('hidden');
