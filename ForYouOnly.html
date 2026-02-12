@@ -3,41 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For My Bestie ✨</title>
+    <title>For My Dostu ✨</title>
     <style>
         body {
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
+            align-items: flex-start;
+            padding-top: 20px;
+            padding-bottom: 20px;
             margin: 0;
-            background-color: #ffe4e1;
-            font-family: sans-serif;
+            background: linear-gradient(135deg, #ffe4e1 0%, #ffb6d9 50%, #ff99ac 100%);
+            font-family: 'Arial', sans-serif;
             text-align: center;
-            overflow: hidden;
-            touch-action: none; 
+            overflow-y: auto;
+            overflow-x: hidden;
+            touch-action: auto; 
+            min-height: 100vh;
         }
 
         #container {
-            background: white;
-            padding: 2rem;
+            background: linear-gradient(135deg, #ffffff 0%, #fff5f7 100%);
+            padding: 1rem;
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.25), 0 5px 15px rgba(0,0,0,0.1);
             max-width: 85%;
             width: 320px;
             position: relative;
             z-index: 10;
+            border: 2px solid rgba(255, 77, 109, 0.1);
+            animation: slideIn 0.6s ease;
         }
 
-        h1 { color: #d63384; font-size: 1.5rem; }
-        p { color: #555; font-size: 1rem; }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 { 
+            color: #ff1493;
+            font-size: 1.5rem; 
+            margin: 0.3rem 0; 
+            text-shadow: 2px 2px 4px rgba(255, 77, 109, 0.1);
+            font-weight: 900;
+            letter-spacing: 1px;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 2px 2px 4px rgba(255, 77, 109, 0.1); }
+            50% { text-shadow: 0 0 10px rgba(255, 77, 109, 0.4); }
+        }
+
+        h3 { 
+            margin: 0.5rem 0;
+            color: #d63384;
+            font-weight: 700;
+        }
+        p { 
+            color: #666; 
+            font-size: 1rem; 
+            margin: 0.3rem 0;
+            line-height: 1.4;
+        }
 
         .btn-group {
-            margin-top: 25px;
+            margin-top: 15px;
             display: flex;
             justify-content: center;
             gap: 20px;
-            /* Changed to relative to give buttons their own space initially */
             position: relative; 
             min-height: 50px;
         }
@@ -50,16 +83,31 @@
             cursor: pointer;
             font-weight: bold;
             touch-action: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        #yesBtn { background-color: #ff4d6d; color: white; }
+        #yesBtn { 
+            background: linear-gradient(135deg, #ff4d6d 0%, #ff1493 100%);
+            color: white;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        #yesBtn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4);
+        }
 
         #noBtn {
-            background-color: #6c757d;
+            background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
             color: white;
-            /* Removed absolute from here so it doesn't overlap at start */
             transition: transform 0.1s ease;
             z-index: 99;
+        }
+
+        #noBtn:hover {
+            transform: scale(0.95);
         }
 
         .hidden { display: none; }
@@ -76,15 +124,87 @@
             0% { transform: translateY(0) rotate(0deg); opacity: 1; }
             100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
+
+        .shayri {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #ffb6d9;
+            line-height: 1.8;
+            background: linear-gradient(135deg, rgba(255, 182, 217, 0.1) 0%, rgba(255, 99, 130, 0.05) 100%);
+            padding: 0.8rem;
+            border-radius: 15px;
+            box-shadow: inset 0 2px 5px rgba(255, 77, 109, 0.1);
+        }
+
+        .shayri-line {
+            color: #d63384;
+            font-size: 0.95rem;
+            margin: 0.4rem 0;
+            font-style: italic;
+            word-wrap: break-word;
+            -webkit-text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .valentine-images {
+            font-size: 2rem;
+            margin: 0.5rem 0;
+            letter-spacing: 0.5rem;
+            animation: bounce 1.5s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .content-image {
+            font-size: 3rem;
+            margin: 1rem 0;
+            animation: rotate 3s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .dare-message {
+            font-size: 0.9rem;
+            color: #ff1493;
+            margin: 0.8rem 0;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
     </style>
 </head>
 <body>
 
     <div id="container">
+        <div id="shayriSection" class="shayri">
+            <div class="valentine-images">🌹 💕 🌹</div>
+            <div class="shayri-line">Dosti ka rishta sabse khaas hota hai,</div>
+            <div class="shayri-line">Isme har pal ek naya ehsas hota hai.</div>
+            <div class="shayri-line">Zaroori nahi Valentine par koi mehboob hi ho,</div>
+            <div class="shayri-line">Saccha dost ho toh khushi ka har pal paas hota hai.</div>
+            <div class="valentine-images">💕 🌹 💕</div>
+        </div>
+
         <div id="mainContent">
-            <h1>Hey Bestie! ✨</h1>
+            <div class="content-image">💐</div>
+            <h1>Hey Dostu! ✨</h1>
+            <div class="valentine-images">💖 💘 💖</div>
             <p>Valentine's Day is for the people who make life better. Thanks for being you!</p>
             <h3>Will you be my Valentine?</h3>
+            <div class="dare-message">👀 Dare you to click No... if you can! 😏</div>
             
             <div class="btn-group">
                 <button id="yesBtn" onclick="showThanks()">YES</button>
@@ -129,7 +249,7 @@
             const thanksMsg = document.getElementById('thanksMessage');
             thanksMsg.innerHTML = `
                 <h1 style="font-size: 3rem;">💖</h1>
-                <p style="font-size: 1.5rem; color: #d63384; font-weight: bold;">Yay! Bestie Valentine's! 🌸</p>
+                <p style="font-size: 1.5rem; color: #d63384; font-weight: bold;">Yay! Dostu Valentine's! 🌸</p>
                 <p>Can't wait, ${bestieName}!</p>
             `;
             document.getElementById('mainContent').classList.add('hidden');
