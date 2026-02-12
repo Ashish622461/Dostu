@@ -184,6 +184,92 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #ffffff 0%, #fff5f7 100%);
+            margin: 20px auto 0;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.3);
+            border: 2px solid rgba(255, 77, 109, 0.1);
+            max-height: calc(100vh - 40px);
+            overflow-y: auto;
+            animation: slideInDown 0.4s ease;
+        }
+
+        @keyframes slideInDown {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-message {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin: 1rem 0;
+            text-align: center;
+            font-style: italic;
+        }
+
+        .close-btn {
+            background: linear-gradient(135deg, #ff4d6d 0%, #ff1493 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .close-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4);
+        }
+
+        .special-link {
+            background: linear-gradient(135deg, #ff4d6d 0%, #ff1493 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            cursor: pointer;
+            margin-top: 1rem;
+            border: none;
+            animation: bounce 1.5s ease-in-out infinite;
+        }
+
+        .special-link:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -213,7 +299,15 @@
         </div>
 
         <div id="thanksMessage" class="hidden"></div>
-    </div>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <h1 style="color: #ff1493; margin-bottom: 1rem;">💖 For You 💖</h1>
+                <div class="modal-message">
+                    Pata nahi kyun, par main aapse bohot zyada attached ho gaya hoon. Na naam pata hai, na koi pic hai, na ghar ka pata hai. Mere liye aap ek best friend (Dostu) ho jisse baat kiye bina mera din nahi guzarta. Mera din tabhi shuru hota hai jab main aapko date wala message bhej deta hoon. Main hamesha aapke contact mein rehna chahta hoon aur umeed hai hamari ye bonding hamesha aise hi rahegi. Nazar na lage hamari dosti ko. Inshallah.
+                </div>
+                <button class="close-btn" onclick="closeModal()">Close</button>
+            </div>
+        </div>
 
     <script>
         const bestieName = "Dostu";
@@ -251,11 +345,27 @@
                 <h1 style="font-size: 3rem;">💖</h1>
                 <p style="font-size: 1.5rem; color: #d63384; font-weight: bold;">Yay! Dostu Valentine's! 🌸</p>
                 <p>Can't wait, ${bestieName}!</p>
+                <button class="special-link" onclick="openModal()">💌 Read My Message 💌</button>
             `;
             document.getElementById('mainContent').classList.add('hidden');
             thanksMsg.classList.remove('hidden');
             document.getElementById('noBtn').style.display = 'none';
             setInterval(createHeart, 300);
+        }
+
+        function openModal() {
+            document.getElementById('myModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('myModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
         }
 
         function createHeart() {
